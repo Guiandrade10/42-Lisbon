@@ -43,7 +43,8 @@ typedef struct s_img
 	void	*empty;
 	void	*collectible;
 	void	*wall;
-	void	*exit;
+	void	*exit_close;
+	void	*exit_open;
 	void	*player_left;
 	void	*player_right;
 	void	*player_up;

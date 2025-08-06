@@ -26,7 +26,12 @@ static void	render_tile(t_map *map, int x, int y)
 		mlx_put_image_to_window(map->mlx, map->wnd,
 			map->img.player_down, x + 8, y);
 	else if (type == 'E')
-		mlx_put_image_to_window(map->mlx, map->wnd, map->img.exit, x, y);
+	{
+		if(map->c == 0)
+			mlx_put_image_to_window(map->mlx, map->wnd, map->img.exit_open, x, y);
+		else
+			mlx_put_image_to_window(map->mlx, map->wnd, map->img.exit_close, x, y);
+	}
 	else if (type == '1')
 		mlx_put_image_to_window(map->mlx, map->wnd, map->img.wall, x, y);
 }

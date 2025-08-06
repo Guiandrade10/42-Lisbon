@@ -26,7 +26,7 @@ void	load_player_textures(t_map *map)
 	map->img.player_left = mlx_xpm_file_to_image(map->mlx,
 			"textures/left.xpm", &a, &a);
 	map->img.player_on_exit = mlx_xpm_file_to_image(map->mlx,
-			"textures/left.xpm", &a, &a);
+			"textures/player_dor.xpm", &a, &a);
 }
 
 void	load_textures(t_map *map)
@@ -38,9 +38,11 @@ void	load_textures(t_map *map)
 			"textures/flor.xpm", &a, &a);
 	map->img.wall = mlx_xpm_file_to_image(map->mlx,
 			"textures/wall.xpm", &a, &a);
-	map->img.exit = mlx_xpm_file_to_image(map->mlx,
+	map->img.exit_close = mlx_xpm_file_to_image(map->mlx,
+			"textures/closed.dor.xpm", &a, &a);
+	map->img.exit_open = mlx_xpm_file_to_image(map->mlx,
 			"textures/door.xpm", &a, &a);
 	map->img.collectible = mlx_xpm_file_to_image(map->mlx,
-			"textures/key.xpm", &a, &a);
+			"textures/key.xpm", &a, &a);	
 	load_player_textures(map);
 }
