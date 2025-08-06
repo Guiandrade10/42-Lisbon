@@ -12,8 +12,23 @@
 
 #include "../include/so_long.h"
 
+static void free_img(t_map *map, void *img)
+{
+	mlx_destroy_image(map->mlx, img);
+}
+
 int	ft_close(t_map *map)
 {
+	free_img(map->mlx, map->img.collectible);
+	free_img(map->mlx, map->img.wall);
+	free_img(map->mlx, map->img.exit_open);
+	free_img(map->mlx, map->img.exit_close);
+	free_img(map->mlx, map->img.player_left);
+	free_img(map->mlx, map->img.player_right);
+	free_img(map->mlx, map->img.player_up);
+	free_img(map->mlx, map->img.player_down);
+	free_img(map->mlx, map->img.player_on_exit);
+	free_img(map->mlx, map->img.empty);
 	mlx_destroy_window(map->mlx, map->wnd);
 	ft_free_array(map->array, map->y);
 	exit(EXIT_SUCCESS);
@@ -25,10 +40,6 @@ void	ft_win(t_map *map)
 	map->exit = 1;
 	map->moves++;
 	mlx_clear_window(map->mlx, map->wnd);
-	mlx_string_put(map->mlx, map->wnd,
-		map->x / 2 * IMG_PXL, map->y / 2 * IMG_PXL, 0xFFFA9E, "YOU WON");
-	write(1, "\n", 1);
-	write(1, "\x1b[32;01m", 9);
-	write(1, "🏆🏆YOU WON!!🏆🏆\n", 27);
-	write(1, "\x1b[0m", 5);
+	write(1, "\nGame Over", 11);
+	
 }

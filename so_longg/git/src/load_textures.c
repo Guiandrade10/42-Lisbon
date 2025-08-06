@@ -38,10 +38,10 @@ void	load_textures(t_map *map)
 			"textures/flor.xpm", &a, &a);
 	map->img.wall = mlx_xpm_file_to_image(map->mlx,
 			"textures/wall.xpm", &a, &a);
-	map->img.exit_close = mlx_xpm_file_to_image(map->mlx,
-			"textures/closed.dor.xpm", &a, &a);
 	map->img.exit_open = mlx_xpm_file_to_image(map->mlx,
 			"textures/door.xpm", &a, &a);
+	map->img.exit_close = mlx_xpm_file_to_image(map->mlx,
+			"textures/closed.dor.xpm", &a, &a);
 	map->img.collectible = mlx_xpm_file_to_image(map->mlx,
 			"textures/key.xpm", &a, &a);	
 	load_player_textures(map);

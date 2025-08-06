@@ -3,7 +3,7 @@ NAME        = so_long
 
 # Compilers and flags
 CC          = gcc
-CFLAGS      = -Wall -Wextra -Werror
+CFLAGS      = -Wall -Wextra -Werror 
 
 # Directories
 SRC_DIR     = src
@@ -56,6 +56,8 @@ fclean: clean
 	@$(MAKE) -C $(MLX_DIR) clean
 	rm -f $(NAME)
 
+val:
+	valgrind --leak-check=full ./so_long maps/map_0.ber
 # Rebuild all
 re: fclean all
 

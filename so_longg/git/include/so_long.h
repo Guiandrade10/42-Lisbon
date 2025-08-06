@@ -43,8 +43,8 @@ typedef struct s_img
 	void	*empty;
 	void	*collectible;
 	void	*wall;
-	void	*exit_close;
 	void	*exit_open;
+	void	*exit_close;
 	void	*player_left;
 	void	*player_right;
 	void	*player_up;
@@ -64,7 +64,6 @@ typedef struct s_map
 	int			x;
 	int			e;
 	int			c;
-	int			player_on_exit;
 	int			c_check;
 	int			e_check;
 	int			p;
@@ -83,6 +82,13 @@ void	read_map_file(t_map *map);
 void	load_textures(t_map *map);
 void	render_map(t_map *map);
 int		key_hook(int keycode, t_map *map);
+
+void	player_left(t_map *map, int x, int y);
+void	player_right(t_map *map, int x, int y);
+void	player_down(t_map *map, int x, int y);
+void	player_up(t_map *map, int x, int y);
+void	player_z(t_map *map, int x, int y);
+void 	print_all(t_map *map, int x, int y, void *image);
 
 void	map_filename_error(void);
 void	wall_error(t_map *map);

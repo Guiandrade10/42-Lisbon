@@ -23,7 +23,7 @@ void	locate_player(t_map *map)
 		x = 0;
 		while (x < map->x)
 		{
-			if (map->array[y][x] == 'P')
+			if (map->array[y][x] == 'P' || map->array[y][x] == 'Z')
 			{
 				map->player.y = y;
 				map->player.x = x;

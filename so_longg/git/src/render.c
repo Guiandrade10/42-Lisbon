@@ -15,25 +15,27 @@
 static void	render_tile(t_map *map, int x, int y)
 {
 	int	type;
-
+	
 	type = map->array[y / IMG_PXL][x / IMG_PXL];
 	if (type == 'C' || type == 'P' || type == 'E' || type == '0')
-		mlx_put_image_to_window(map->mlx, map->wnd, map->img.empty, x, y);
+		mlx_put_image_to_window(map->mlx, map->wnd,
+			map->img.empty, x, y);
 	if (type == 'C')
 		mlx_put_image_to_window(map->mlx, map->wnd,
 			map->img.collectible, x, y);
 	else if (type == 'P')
 		mlx_put_image_to_window(map->mlx, map->wnd,
-			map->img.player_down, x + 8, y);
+			map->img.player_down, x, y);
 	else if (type == 'E')
-	{
-		if(map->c == 0)
+	{	if(map->c == 0)
 			mlx_put_image_to_window(map->mlx, map->wnd, map->img.exit_open, x, y);
 		else
 			mlx_put_image_to_window(map->mlx, map->wnd, map->img.exit_close, x, y);
 	}
 	else if (type == '1')
 		mlx_put_image_to_window(map->mlx, map->wnd, map->img.wall, x, y);
+	else if (type == 'Z')
+		mlx_put_image_to_window(map->mlx, map->wnd, map->img.player_on_exit, x, y);
 }
 
 void	render_map(t_map *map)
@@ -53,6 +55,11 @@ void	render_map(t_map *map)
 		x = 0;
 		y++;
 	}
+}
+void print_all(t_map *map, int x, int y, void *image)
+{
+	mlx_put_image_to_window(map->mlx, map->wnd, image,
+		x * IMG_PXL, y * IMG_PXL);
 }
 
 void	print_moves(t_map *map)

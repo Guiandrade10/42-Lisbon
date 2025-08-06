@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
-#include <stdio.h>
 
 static void	move_resume(t_map *map, int x, int y, int dir)
 {
@@ -23,13 +22,13 @@ static void	move_resume(t_map *map, int x, int y, int dir)
 		x -= 1;
 	if (dir == RIGHT)
 	x += 1;
+	render_map(map);
 	if (map->array[y][x] == 'E' && map->c == 0)
 		return (ft_win(map));
 	if (map->array[y][x] == 'C')
 	{
 		map->array[y][x] = '0';
-		map->c--;
-		load_textures(map);
+		map->c--;		
 		render_map(map);
 	}
 }
@@ -45,18 +44,17 @@ void	move_up(t_map *map)
 	{
 		move_resume(map, x, y, UP);
 		if (map->array[y - 1][x] == 'E' && (map->c != 0 || map->exit == 1))
-			return ;
+			return(player_up(map, x, y));
 		map->moves++;
-		mlx_put_image_to_window(map->mlx, map->wnd, map->img.empty,
-			x * IMG_PXL, y * IMG_PXL);
-		if (map->array[y][x] != 'E')
+		print_all(map, x, y, map->img.empty);
+		if (map->array[y][x] == 'Z')
+			player_z(map, x, y);
+		else
 			map->array[y][x] = '0';
 		y--;
 		print_moves(map);
-		mlx_put_image_to_window(map->mlx, map->wnd, map->img.empty,
-			x * IMG_PXL, y * IMG_PXL);
-		mlx_put_image_to_window(map->mlx, map->wnd, map->img.player_up,
-			x * IMG_PXL, y * IMG_PXL);
+		print_all(map, x, y, map->img.empty);
+		print_all(map, x, y, map->img.player_up);
 		map->array[y][x] = 'P';
 		map->player.x = x;
 	}
@@ -73,18 +71,19 @@ void	move_left(t_map *map)
 	{
 		move_resume(map, x, y, LEFT);
 		if (map->array[y][x - 1] == 'E' && (map->c != 0 || map->exit == 1))
-			return ;
+			return(player_left(map, x, y));
 		map->moves++;
-		mlx_put_image_to_window(map->mlx, map->wnd, map->img.empty,
-			x * IMG_PXL, y * IMG_PXL);
-		if (map->array[y][x] != 'E')
+		print_all(map, x, y, map->img.empty);
+		if (map->array[y][x] == 'Z')
+		{
+			player_z(map, x, y);
+		}
+		else
 			map->array[y][x] = '0';
 		x--;
 		print_moves(map);
-		mlx_put_image_to_window(map->mlx, map->wnd, map->img.empty,
-			x * IMG_PXL, y * IMG_PXL);
-		mlx_put_image_to_window(map->mlx, map->wnd, map->img.player_left,
-			x * IMG_PXL, y * IMG_PXL);
+		print_all(map, x, y, map->img.empty);
+		print_all(map, x, y, map->img.player_left);
 		map->array[y][x] = 'P';
 		map->player.y = y;
 	}
@@ -101,11 +100,17 @@ void	move_down(t_map *map)
 	{
 		move_resume(map, x, y, DOWN);
 		if (map->array[y + 1][x] == 'E' && (map->c != 0 || map->exit == 1))
-			return ;
+			return(player_down(map, x, y));
 		map->moves++;
 		mlx_put_image_to_window(map->mlx, map->wnd, map->img.empty,
 			x * IMG_PXL, y * IMG_PXL);
-		if (map->array[y][x] != 'E')
+		if (map->array[y][x] == 'Z')
+		{
+			mlx_put_image_to_window(map->mlx, map->wnd, map->img.exit_close,
+				x * IMG_PXL, y * IMG_PXL);
+			map->array[y][x] = 'E';
+		}
+		else
 			map->array[y][x] = '0';
 		y++;
 		mlx_put_image_to_window(map->mlx, map->wnd, map->img.empty,
@@ -129,11 +134,17 @@ void	move_right(t_map *map)
 	{
 		move_resume(map, x, y, RIGHT);
 		if (map->array[y][x + 1] == 'E' && (map->c != 0 || map->exit == 1))
-			return ;
+			return(player_right(map, x, y));
 		map->moves++;
 		mlx_put_image_to_window(map->mlx, map->wnd, map->img.empty,
 			x * IMG_PXL, y * IMG_PXL);
-		if (map->array[y][x] != 'E')
+		if (map->array[y][x] == 'Z')
+		{
+			mlx_put_image_to_window(map->mlx, map->wnd, map->img.exit_close,
+				x * IMG_PXL, y * IMG_PXL);
+			map->array[y][x] = 'E';
+		}
+		else
 			map->array[y][x] = '0';
 		x++;
 		mlx_put_image_to_window(map->mlx, map->wnd, map->img.empty,
