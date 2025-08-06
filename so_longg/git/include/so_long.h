@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-and <gude-and@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gude-and <gude-and@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 13:44:16 by gude-and          #+#    #+#             */
-/*   Updated: 2025/07/27 17:14:41 by gude-and         ###   ########.fr       */
+/*   Updated: 2025/08/04 21:29:31 by gude-and         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define SO_LONG_H
 
 # include "../Libft/libft.h"
-# include "../mlx/mlx.h"
+# include "../minilibx-linux/mlx.h"
 # include <unistd.h>
 # include <fcntl.h>
 # include <errno.h>
@@ -48,6 +48,7 @@ typedef struct s_img
 	void	*player_right;
 	void	*player_up;
 	void	*player_down;
+	void	*player_on_exit;
 }t_img;
 
 typedef struct s_map
@@ -62,6 +63,7 @@ typedef struct s_map
 	int			x;
 	int			e;
 	int			c;
+	int			player_on_exit;
 	int			c_check;
 	int			e_check;
 	int			p;

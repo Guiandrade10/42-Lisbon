@@ -9,7 +9,7 @@ CFLAGS      = -Wall -Wextra -Werror
 SRC_DIR     = src
 INCLUDE_DIR = include
 LIBFT_DIR   = Libft
-MLX_DIR     = mlx
+MLX_DIR     = minilibx-linux
 
 # Paths
 INCLUDES    = -I$(INCLUDE_DIR) -I$(LIBFT_DIR)/includes -I$(MLX_DIR)
@@ -21,7 +21,9 @@ OBJ         = $(SRC:.c=.o)
 # Libraries
 LIBFT       = $(LIBFT_DIR)/libft.a
 
-MLX_FLAGS   = -Lmlx -lmlx_Linux -lXext -lX11
+MLX         = $(MLX_DIR)/libmlx_Linux.a
+MLX_FLAGS   = $(MLX) -lXext -lX11
+
 
 # Default target
 all: $(NAME)
@@ -30,8 +32,12 @@ all: $(NAME)
 $(LIBFT):
 	@$(MAKE) -C $(LIBFT_DIR)
 
+# Build mlx
+$(MLX):
+	@$(MAKE) -C $(MLX_DIR)
+
 # Link the executable
-$(NAME): $(LIBFT) $(OBJ)
+$(NAME): $(LIBFT) $(MLX) $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) -o $(NAME) $(MLX_FLAGS) $(LIBFT) -no-pie
 
 # Compile .c to .o
@@ -41,11 +47,13 @@ $(NAME): $(LIBFT) $(OBJ)
 # Clean objects
 clean:
 	@$(MAKE) -C $(LIBFT_DIR) clean
+	@$(MAKE) -C $(MLX_DIR) clean
 	rm -f $(OBJ)
 
 # Full clean including binary
 fclean: clean
 	@$(MAKE) -C $(LIBFT_DIR) fclean
+	@$(MAKE) -C $(MLX_DIR) clean
 	rm -f $(NAME)
 
 # Rebuild all
@@ -53,3 +61,4 @@ re: fclean all
 
 # Phony targets
 .PHONY: all clean fclean re
+

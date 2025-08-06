@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_textures.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-and <gude-and@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gude-and <gude-and@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 14:27:47 by gude-and          #+#    #+#             */
-/*   Updated: 2025/07/27 17:05:07 by gude-and         ###   ########.fr       */
+/*   Updated: 2025/08/04 21:28:45 by gude-and         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ void	load_player_textures(t_map *map)
 	map->img.player_down = mlx_xpm_file_to_image(map->mlx,
 			"textures/down.xpm", &a, &a);
 	map->img.player_left = mlx_xpm_file_to_image(map->mlx,
+			"textures/left.xpm", &a, &a);
+	map->img.player_on_exit = mlx_xpm_file_to_image(map->mlx,
 			"textures/left.xpm", &a, &a);
 }
 
